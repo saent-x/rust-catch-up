@@ -19,7 +19,7 @@ fn main(){
     //
     // println!("End value: {val}")
 
-    datatypes_operators_keywords();
+    string_s()
 }
 
 fn datatypes_operators_keywords(){
@@ -41,7 +41,59 @@ fn datatypes_operators_keywords(){
         loop_idx += 1;
     }
 
+    // while
+    while loop_idx < arr_1.len(){
+        println!("arr: {}",  arr_1[loop_idx]);
+        loop_idx += 1;
+    }
 
+    for val in arr_1.iter() {
+        println!("val: {}", val);
+    }
+
+    let tuple: (u8, String, f64) = (67, "John".to_string(), 50_000.00);
+
+    println!("Name: {}", tuple.1);
+}
+
+fn string_s(){
+    let mut str_1: String = String::new();
+
+    str_1.push('B');
+    str_1.push('-');
+    str_1.push_str("word");
+
+    let str_2: String = String::from("d k d f g w y s e f g");
+    let mut v_1: Vec<char> = str_2.chars()
+        .collect();
+
+    v_1.sort();
+    v_1.dedup();
+
+    for char in v_1{
+        println!("{}", char);
+    }
+
+    let str_3: &str = "Temp String";
+    let mut str_4: String = str_3.to_string();
+
+    println!("{}", str_4);
+
+    let byte_arr_1 =  str_4.as_bytes();
+    let str_5 = &str_4[0..6];
+
+    println!("length: {}", str_5.len());
+
+    str_4.clear();
+
+    let str_6 = String::from("Just some nerve");
+    let str_7 = String::from("... yh");
+
+    let str_8 = str_6 + &str_7; // str_6 borrowed
+
+    for char in str_8.bytes(){
+        println!("{}", char);
+    }
 }
 
 // loops variables and datatypes
