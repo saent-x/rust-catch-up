@@ -5,21 +5,28 @@ use rand::Rng;
 use std::io::{Write, BufReader, BufRead, ErrorKind};
 use std::fs::File;
 use std::cmp::Ordering;
+use std::ops::Add;
 
 fn main(){
-    // print!("Start Value: ");
-    //
-    // let mut value =  String::new();
-    //
-    // io::stdin()
-    //     .read_line(&mut value)
-    //     .expect("failed to real line");
-    //
-    // let val: i32 = shadowing(10);
-    //
-    // println!("End value: {val}")
+    println!("10 + 33 = {}", generics(10,33))
+}
 
-    vectors()
+fn std_input(){
+    print!("Start Value: ");
+
+    let mut value =  String::new();
+
+    io::stdin()
+        .read_line(&mut value)
+        .expect("failed to real line");
+
+    let val: i32 = shadowing(value.parse().unwrap());
+
+    println!("End value: {val}")
+}
+
+fn generics<T:Add<Output = T>>(x: T, y: T) -> T {
+    return  x + y;
 }
 
 fn vectors(){
