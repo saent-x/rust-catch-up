@@ -6,9 +6,90 @@ use std::io::{Write, BufReader, BufRead, ErrorKind};
 use std::fs::File;
 use std::cmp::Ordering;
 use std::ops::Add;
+use std::collections::{hash_map, HashMap};
+use std::f32::consts::PI;
 
 fn main(){
-    println!("10 + 33 = {}", generics(10,33))
+    struct_traits()
+}
+
+fn struct_traits(){
+    // structs
+    struct Customer {
+        name: String,
+        address: String,
+        balance: f32,
+    }
+
+    let mut cherry: Customer = Customer {
+        name: String::from("Cherry Burns"),
+        address: String::from("125 Gordons street, Atlantis."),
+        balance: 874.96
+    };
+
+    // generic structs
+    struct Rectangle<T, U> {
+        length: T,
+        height: U,
+    }
+
+    let rec: Rectangle<i32, f64> = Rectangle{
+        length: 10,
+        height: 56.8
+    };
+
+    // traits (similar to interfaces)
+    trait Shape{
+        fn new(length: f32, width: f32) -> Self;
+        fn area(&self) -> f32;
+    }
+
+    struct Rectangle2 { length: f32, width: f32};
+    struct Circle {length: f32, width: f32};
+
+    impl Shape for Circle{
+        fn new(length: f32, width: f32) -> Circle{
+            return Circle{length, width}
+        }
+        fn area(&self) -> f32 {
+            return (self.length / 2.0).powf(2.0) * PI;
+        }
+    }
+
+    let cir: Circle =  Shape::new(50.0,50.0);
+
+    println!("circle area: {}", cir.area());
+}
+
+fn ownership_hashmaps(){
+    // ownership
+    let str_1 = String::from("my world");
+    let str_2 = str_1; // str_1 no longer exists [str, arr, vec]
+
+    let str_3 = String::from("my world 2");
+    let str_4 = str_3.clone(); // str_3 still exists
+
+    println!("hi {str_3}");
+
+    // hash maps
+    let mut heroes = HashMap::new();
+
+    heroes.insert("Superman", "Clark Kent");
+    heroes.insert("Batman", "Bruce Wayne");
+    heroes.insert("The Flash", "Barry Allen");
+
+    for(k,v) in heroes.iter(){
+        println!("{} || {}", k, v);
+    }
+
+    if heroes.contains_key(&"Batman"){
+        let the_bm = heroes.get((&"Batman"));
+
+        match the_bm {
+            Some(x) => println!("batman is a hero"),
+            None => println!("no hero"),
+        }
+    }
 }
 
 fn std_input(){
@@ -189,5 +270,5 @@ fn shadowing(value: i32) -> i32{
 
     println!("x value outside shadow: {x}");
 
-    x
+    return x
 }
