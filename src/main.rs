@@ -1,5 +1,7 @@
 #![allow(unused)]
 
+mod restaurant;
+
 use std::io;
 use rand::Rng;
 use std::io::{Write, BufReader, BufRead, ErrorKind};
@@ -8,9 +10,10 @@ use std::cmp::Ordering;
 use std::ops::Add;
 use std::collections::{hash_map, HashMap};
 use std::f32::consts::PI;
+use crate::restaurant::order_food;
 
 fn main(){
-    struct_traits()
+    order_food();
 }
 
 fn struct_traits(){
@@ -23,7 +26,7 @@ fn struct_traits(){
 
     let mut cherry: Customer = Customer {
         name: String::from("Cherry Burns"),
-        address: String::from("125 Gordons street, Atlantis."),
+        address: String::from("125 Gordon's street, Atlantis."),
         balance: 874.96
     };
 

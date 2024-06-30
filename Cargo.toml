@@ -8,4 +8,4 @@ rand = "0.8.5"
 
 [[bin]]
 name = "rust-tutorial"
-path = "main.rs"
+path = "src/main.rs"
