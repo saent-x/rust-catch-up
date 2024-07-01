@@ -34,3 +34,35 @@ pub fn error_handling() {
         _other_error => panic!("problem opening file: {:?}", error),
     });
 }
+
+pub fn iterators(){
+    let arr_it = [1,2,3,4,5,6,7,8,9,10];
+
+    for val in arr_it.iter(){
+        println!("{val}");
+    }
+
+    let mut iter_1 = arr_it.iter();
+
+    println!("1st : {:?}", iter_1.next())
+}
+
+// closures
+pub fn closures(){
+    // like lamdas
+    let can_vote = |age: i32| -> bool {
+        age > 18
+    };
+
+    println!("can vote? {}", can_vote(20));
+
+    fn math_funcs<T>(a: i32, b: i32, func: T) -> i32 where T: Fn(i32, i32) -> i32 {
+        func(a,b)
+    }
+
+    let sum = |a, b| a + b;
+    let prod = |a, b| a * b;
+
+    println!("78 + 74 = {}", math_funcs(78, 74, sum));
+    println!("78 * 74 = {}", math_funcs(78, 74, prod));
+}
