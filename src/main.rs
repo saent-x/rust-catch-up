@@ -3,6 +3,7 @@
 mod restaurant;
 mod rust_semantics;
 mod more_semantics;
+mod concurrency;
 
 use std::io;
 use rand::Rng;
@@ -17,5 +18,5 @@ use crate::more_semantics::error_handling;
 use crate::restaurant::order_food;
 
 fn main(){
-    more_semantics::smart_pointers();
+    concurrency::bank_ref_example();
 }

@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader, ErrorKind, Write};
+use std::thread;
 
 pub fn error_handling() {
     let path = "lines.txt";
