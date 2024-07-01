@@ -17,5 +17,5 @@ use crate::more_semantics::error_handling;
 use crate::restaurant::order_food;
 
 fn main(){
-    more_semantics::closures()
+    more_semantics::smart_pointers();
 }

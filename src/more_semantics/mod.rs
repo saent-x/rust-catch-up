@@ -66,3 +66,38 @@ pub fn closures(){
     println!("78 + 74 = {}", math_funcs(78, 74, sum));
     println!("78 * 74 = {}", math_funcs(78, 74, prod));
 }
+
+// Smart Pointer {BOX}
+pub fn smart_pointers(){
+    let box_1 = Box::new(10);
+
+    println!("box: {}", box_1);
+
+    // Binary Tree
+    struct TreeNode<T>{
+        pub left: Option<Box<TreeNode<T>>>,
+        pub right: Option<Box<TreeNode<T>>>,
+        pub key: T,
+    }
+
+    impl<T> TreeNode<T> {
+        pub fn new(key: T) -> Self {
+            TreeNode{ left: None, right: None, key}
+        }
+
+        pub fn left(mut self, node: TreeNode<T>) -> Self {
+            self.left = Some(Box::new(node));
+            self
+        }
+
+        pub fn right(mut self, node: TreeNode<T>) -> Self {
+            self.right = Some(Box::new(node));
+            self
+        }
+    }
+
+    // create nodes
+    let node_1 = TreeNode::new(1)
+        .left(TreeNode::new(2))
+        .right(TreeNode::new(3));
+}
