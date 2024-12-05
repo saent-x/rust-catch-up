@@ -19,10 +19,25 @@ use std::f32::consts::PI;
 use crate::more_semantics::error_handling;
 use crate::restaurant::order_food;
 
+
 fn main() -> Result<(), Box<dyn Error>>{
-    
+    struct Animal{
+        name: String,
+        genus: String
+    }
 
+    impl Animal{
+        fn make_sound(&self){
+            println!("{} from the family of {} makes a sound: Woof Woof!!", self.name, self.genus)
+        }
+    }
 
+    let dog = Animal{
+        name: String::from("Jackie"),
+        genus: String::from("Canis")
+    };
+
+    dog.make_sound();
 
     Ok(())
 }

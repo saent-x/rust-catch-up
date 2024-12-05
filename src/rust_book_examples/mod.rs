@@ -282,8 +282,47 @@ mod rust_book_examples{
         println!("{} {}", point[0], point[1]);
     }
 
-    pub fn structs(){
+    pub fn structs_1(){
+        struct Animal{
+            name: String,
+            genus: String,
+            is_black: bool
+        }
+    
+        let animal = Animal{
+            name: String::from("Dog"),
+            genus: String::from("Canis"),
+            is_black: false
+        };
+    
+        let animal_2 = Animal{
+            name: String::from("Wolf"),
+            ..animal // using struct update syntax
+        };
+    
+        // Tuple Struct
+        #[derive(Debug)]
+        struct Version(u32, u32, u32);
+    
+        #[derive(Debug)]
+        struct Package(String, Version);
+    
+        let version = Version(1, dbg!(10/5), 0); // dbg! macro helps us figure out what our code is doing.
+        let package = Package(String::from("flutter-engine"), version);
+    
+        println!("{:#?}", package);
+    
+        dbg!(&package);
+    
+        // Unit like structs
+        struct PASSED;
+        struct FAILED;
+    
+        let result = PASSED;
+    }
 
+    pub fn struct_2(){
+        
     }
 }
 
