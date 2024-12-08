@@ -373,5 +373,43 @@ mod rust_book_examples{
         
         println!("version: {}", version.get_version());
     }
+
+    pub fn enums_1(){
+         // * Enums Implementation
+    enum Shape {
+        Circle,
+        Square,
+        Rectangle,
+        Star
+    }
+
+    let shape = Shape::Rectangle;
+
+    // * Using Enums with match
+    match shape {
+        Shape::Circle => println!("A Circle"),
+        Shape::Square => println!("A Square"),
+        Shape::Rectangle => println!("A Rectangle"),
+        Shape::Star => println!("A Star"),
+    }
+
+    // ---------------------
+
+    enum Color{
+        Red,
+        Yellow,
+        Blue
+    }
+
+    fn print_color(color: Color){
+        match color {
+            Color::Blue => println!("Hello Blue"),
+            Color::Red => println!("Hello Red"),
+            Color::Yellow => println!("Hello Yellow")
+        }
+    }
+
+    print_color(Color::Yellow);
+    }
 }
 
