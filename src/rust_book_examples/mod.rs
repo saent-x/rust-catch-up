@@ -475,5 +475,114 @@ mod rust_book_examples{
             }
         }    
     }
+
+    /// Introductions to using the Options types
+    /// * Option - Options are types that could be one of two things
+    /// * 1. Some data of a specified type
+    /// * 2. Nothing
+    /// * -> Used in scenarios where data may not be required or is unavailable
+    pub fn options_1(){
+        struct Account{
+            name: Option<String>,
+            id: u32
+        }
+
+        let john = Account{
+            name: Some(String::from("JohnPaul")),
+            id: 1
+        };
+
+        let paul = Account{
+            name: None,
+            id: 2
+        };
+
+        match john.name{
+            Some(name) => println!("Name: {name}"),
+            None => println!("No name specified")
+        }
+
+        // ---------------
+
+        struct Employee {
+            email: String,
+            employee_id: u32
+        }
+
+        let employee_1 = Employee{
+            email: String::from("jp@mailer.com"),
+            employee_id: 1
+        };
+
+        let employee_2 = Employee{
+            email: String::from("grace@mailer.com"),
+            employee_id: 2
+        };
+
+        fn get_authorized_employee(emp: &Employee, optional: Option<u32>) -> Option<String>{
+            match emp {
+                Employee{employee_id:1, ..} => Some(String::from("Employee Authorized")),
+                Employee { .. } => None
+            }
+        }
+
+        match get_authorized_employee(&employee_1, None){
+            Some(employee_authorization) => println!("Authorization: {employee_authorization}"),
+            None => println!("No Auhtorization")
+        }
+
+    }
+
+    /// An example of the Options type implemented with Structs Matching
+    pub fn options_example(){
+        struct Student {
+            name: String,
+            locker_assigned: Option<u32>
+        }
+    
+        let student_1 = Student{
+            name: String::from("john"),
+            locker_assigned: None
+        };
+    
+        let student_2 =  Student{
+            name: String::from("paul"),
+            locker_assigned: Some(56)
+        };
+    
+        match &student_2{
+            Student{name, locker_assigned} => match locker_assigned {
+                Some(locker) => println!("{name} assigned locker {locker}"),
+                None => println!("{name} assigned no locker")
+            }
+        }
+    }
+
+    pub fn result_datatype(){
+        /// Result Data Type
+        /// A data type that contains one of two types of data
+        /// 1. Successful data
+        /// 2. Error data
+
+        #[derive(Debug)]
+        struct ApiResponse {
+            data: String,
+        }
+        fn connect_to_api(api_link: &str) -> Result<ApiResponse, String>{
+            let mut rng = rand::thread_rng();
+            let api_result = rng.gen_bool(0.5);
+
+            match api_result {
+                true => Ok(ApiResponse{data: String::from("{'user': 'james bond', 'status': 'login successful'}")}),
+                false => Err(String::from("error: api not reacheable"))
+            }
+        }
+
+        let api_response = connect_to_api("https://backend/api/login");
+        match api_response {
+            Ok(api_response) => println!("success: {api_response:?}"),
+            Err(e) => println!("{e}")
+        }
+    }
 }
 
