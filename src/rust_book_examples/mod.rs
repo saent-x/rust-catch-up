@@ -322,7 +322,56 @@ mod rust_book_examples{
     }
 
     pub fn struct_2(){
+        struct Animal{
+            name: String,
+            genus: String
+        }
+    
+        impl Animal{
+            // associated functions
+            fn new(name: String, genus: String) -> Self{
+                Self { name, genus }
+            }
+    
+            // this is a method primarily because it takes self as a parameter - its still an associated function though
+            fn make_sound(&self){
+                println!("{} from the family of {} makes a sound: Woof Woof!!", self.name, self.genus)
+            }
+    
+            // another associated function
+            fn show_struct_type(){
+                println!("Type: Animal")
+            }
+        }
+    
+        let dog = Animal::new(String::from("Jackie"), String::from("Canis"));
+    
+        dog.make_sound();
+    
+        Animal::make_sound(&dog); // calling a method like as associated function but passing the dog obj as self.
+        Animal::show_struct_type(); // calling associated function
+    
+        // -----------------------
+        #[derive(Clone, Copy)]
+        struct Version(u32, u32, u32);
+             
+        let version = Version(1,0,0);
+    
+        impl Version {
+            fn get_version(&self) -> String{
+                 format!("{}.{}.{}", self.0, self.1, self.2)
+            }
+            
+            fn own(self, another: Version) -> Version{
+                Version(self.0.max(another.0), self.1.max(another.1), self.2.max(another.2))
+            }
+    
+            fn mut_fn(&mut self, another: Version){
+                *self = self.own(another)
+            }
+         }
         
+        println!("version: {}", version.get_version());
     }
 }
 
