@@ -375,41 +375,105 @@ mod rust_book_examples{
     }
 
     pub fn enums_1(){
-         // * Enums Implementation
-    enum Shape {
-        Circle,
-        Square,
-        Rectangle,
-        Star
-    }
-
-    let shape = Shape::Rectangle;
-
-    // * Using Enums with match
-    match shape {
-        Shape::Circle => println!("A Circle"),
-        Shape::Square => println!("A Square"),
-        Shape::Rectangle => println!("A Rectangle"),
-        Shape::Star => println!("A Star"),
-    }
-
-    // ---------------------
-
-    enum Color{
-        Red,
-        Yellow,
-        Blue
-    }
-
-    fn print_color(color: Color){
-        match color {
-            Color::Blue => println!("Hello Blue"),
-            Color::Red => println!("Hello Red"),
-            Color::Yellow => println!("Hello Yellow")
+        // * Enums Implementation
+        enum Shape {
+            Circle,
+            Square,
+            Rectangle,
+            Star
         }
+
+        let shape = Shape::Rectangle;
+
+        // * Using Enums with match
+        match shape {
+            Shape::Circle => println!("A Circle"),
+            Shape::Square => println!("A Square"),
+            Shape::Rectangle => println!("A Rectangle"),
+            Shape::Star => println!("A Star"),
+        }
+
+        // ---------------------
+
+        enum Color{
+            Red,
+            Yellow,
+            Blue
+        }
+
+        fn print_color(color: Color){
+            match color {
+                Color::Blue => println!("Hello Blue"),
+                Color::Red => println!("Hello Red"),
+                Color::Yellow => println!("Hello Yellow")
+            }
+        }
+
+        print_color(Color::Yellow);
     }
 
-    print_color(Color::Yellow);
+    pub fn enum_variants_structs_and_matching(){
+        // * Enums Variants
+        enum HouseType {
+            Apartment,
+            Flat,
+            Studio
+        }
+
+        enum RealEstate {
+            House(HouseType),
+            MinimumRentFee(u32)
+        }
+
+        let r_estate = RealEstate::House(HouseType::Studio);
+
+        match r_estate {
+            RealEstate::House(HouseType::Apartment) => println!("no longer available..."),
+            RealEstate::House(HouseType::Studio) => println!("studios are immediately available"),
+            RealEstate::House(housetype) => println!("available in a few months..."),
+            _ => ()
+        }
+
+        // * Match Structs
+        struct CartItem{
+            product_name: String,
+            product_price: u32,
+            count: u32
+        }
+
+        let cart_item =  CartItem{
+            product_name: "piano".to_owned(),
+            product_price: 300,
+            count: 5
+        };
+
+        match cart_item {
+            CartItem{count: 5, ..} => println!("you qualify of a discount..."),
+            CartItem{count, ..} => println!("sorry you don't qualify for the discount")
+        }
+    
+    }
+
+    pub fn advanced_matching_example(){
+        enum Ticket {
+            Backstage(String, u32),
+            VIP(String, u32),
+            Standard(u32)
+        }
+    
+        let bs_ticket = Ticket::Backstage(String::from("Warden"), 8000);
+        let vip_ticket = Ticket::VIP(String::from("JohnP."), 10_000);
+        let sd_ticket = Ticket::Standard(2000);
+    
+        let tickets = vec![bs_ticket, vip_ticket, sd_ticket];
+    
+        for ticket in tickets{
+            match ticket {
+                Ticket::Backstage(holder_name, price ) => println!("Ticket: Backstage, Holder's Name: {}, Price: {}", holder_name, price),
+                Ticket::VIP(holder_name, price ) => println!("Ticket: VIP, Holder's Name: {}, Price: {}", holder_name, price),
+                Ticket::Standard(price ) => println!("Ticket: Standard, Price: {}", price),
+            }
+        }    
     }
 }
 
