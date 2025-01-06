@@ -21,6 +21,38 @@ use crate::restaurant::{order_food, pizza_order};
 use crate::rust_book::examples::guessing_game_example;
 
 fn main() -> Result<(), Box<dyn Error>> {
+    // Traits
+    trait Animal {
+        fn make_sound(&self) -> String;
+        fn get_name(&self) -> String { // Default trait implementations
+            "not sure of my name".to_string()
+        }
+    }
+    
+    struct Dog<'a>(&'a str);
+    
+    impl<'a> Animal for Dog<'a>{
+        fn make_sound(&self) -> String {
+            "woof woof!".to_string()
+        }
+    }
+    
+    let d = Dog("doggo");
+    let name = d.get_name();
+    println!("{}", name);
+    
+    // Traits as parameters
+    fn animal_sound(animal: &impl Animal){
+        println!("{}", animal.make_sound())
+    }
+    
+    // Traits as Generics Boundary
+    fn animal_name<T: Animal>(animal: &T){
+        println!("{}", animal.get_name())
+    }
+    
+    animal_sound(&d);
+    animal_name::<Dog>(&d); // explicitly defined generics
     
     Ok(())
 }
