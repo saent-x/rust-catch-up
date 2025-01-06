@@ -21,8 +21,7 @@ use crate::restaurant::{order_food, pizza_order};
 use crate::rust_book::examples::guessing_game_example;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    guessing_game_example();
-
+    
     Ok(())
 }
 

@@ -628,4 +628,34 @@ pub mod examples {
 
         Ok(())
     }
+    
+    pub fn generics_i(){
+        struct Animal<T> {
+            animal_type: T,
+            color: String
+        }
+        
+        impl<T> Animal<T> {
+            fn check_type(&self, a_type: T){
+                
+            }
+        }
+        // cannot have same fn name in a general and generic implementation
+        // impl Animal<Dog>{
+        //     fn check_type(&self, v: u32){
+                
+        //     }
+        // }
+        
+        fn any_type<T>(a: T) -> T {
+            a
+        }
+        
+        fn not_just_any_type<T: PartialOrd>(b: T, c: T) -> T {
+            match b > c{
+                true => b,
+                false => c
+            }
+        }
+    }
 }
